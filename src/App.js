@@ -59,18 +59,19 @@ const App = () => {
     isError: false,
   });
 
-  const handleFetchStories = React.useCallback(() => {
+  const handleFetchStories = React.useCallback(async () => {
     dispatchStories({ type: "STORIES_FETCH_INIT" });
 
-    axios
-      .get(url)
-      .then((result) => {
-        dispatchStories({
-          type: "STORIES_FETCH_SUCCESS",
-          payload: result.data.hits,
-        });
-      })
-      .catch(() => dispatchStories({ type: "STORIES_FETCH_FAILURE" }));
+    try {
+      const result = await axios.get(url);
+
+      dispatchStories({
+        type: "STORIES_FETCH_SUCCESS",
+        payload: result.data.hits,
+      });
+    } catch {
+      dispatchStories({ type: "STORIES_FETCH_FAILURE" });
+    }
   }, [url]);
 
   React.useEffect(() => {
@@ -102,7 +103,7 @@ const App = () => {
         isFocused
         onInputChange={handleSearchInput}
       >
-        <strong>Search::</strong>
+        <strong>Search:</strong>
       </InputWithLabel>
 
       <button type="button" disabled={!searchTerm} onClick={handleSearchSubmit}>
@@ -168,7 +169,7 @@ const Item = ({ item, onRemoveItem }) => (
     <span>{item.points}</span>
     <span>
       <button type="button" onClick={() => onRemoveItem(item)}>
-        Dismiss!
+        Dismiss
       </button>
     </span>
   </div>
