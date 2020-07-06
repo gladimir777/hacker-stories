@@ -102,7 +102,7 @@ const App = () => {
         isFocused
         onInputChange={handleSearchInput}
       >
-        <strong>Search:</strong>
+        <strong>Search::</strong>
       </InputWithLabel>
 
       <button type="button" disabled={!searchTerm} onClick={handleSearchSubmit}>
