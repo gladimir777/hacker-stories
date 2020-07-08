@@ -181,7 +181,7 @@ const Item = ({ item, onRemoveItem }) => (
     <span>{item.points}</span>
     <span>
       <button type="button" onClick={() => onRemoveItem(item)}>
-        Dismiss
+        Dismiss!
       </button>
     </span>
   </div>
