@@ -3,52 +3,12 @@ import axios from "axios";
 import SearchForm from "./componente/SearchForm";
 import styles from "./App.module.css";
 import List from "./componente/List";
+
+import { storiesReducer } from "./reducers/story";
+
+import { useSemiPersistentState } from "./utilHooks/persistentState";
+
 const API_ENDPOINT = "https://hn.algolia.com/api/v1/search?query=";
-
-const useSemiPersistentState = (key, initialState) => {
-  const [value, setValue] = React.useState(
-    localStorage.getItem(key) || initialState
-  );
-
-  React.useEffect(() => {
-    localStorage.setItem(key, value);
-  }, [value, key]);
-
-  return [value, setValue];
-};
-
-const storiesReducer = (state, action) => {
-  switch (action.type) {
-    case "STORIES_FETCH_INIT":
-      return {
-        ...state,
-        isLoading: true,
-        isError: false,
-      };
-    case "STORIES_FETCH_SUCCESS":
-      return {
-        ...state,
-        isLoading: false,
-        isError: false,
-        data: action.payload,
-      };
-    case "STORIES_FETCH_FAILURE":
-      return {
-        ...state,
-        isLoading: false,
-        isError: true,
-      };
-    case "REMOVE_STORY":
-      return {
-        ...state,
-        data: state.data.filter(
-          (story) => action.payload.objectID !== story.objectID
-        ),
-      };
-    default:
-      throw new Error();
-  }
-};
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
