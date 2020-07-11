@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-
+import SearchForm from "./componente/SearchForm";
 import styles from "./App.module.css";
 
 const API_ENDPOINT = "https://hn.algolia.com/api/v1/search?query=";
@@ -115,61 +115,6 @@ const App = () => {
         <List list={stories.data} onRemoveItem={handleRemoveStory} />
       )}
     </div>
-  );
-};
-
-const SearchForm = ({ searchTerm, onSearchInput, onSearchSubmit }) => (
-  <form onSubmit={onSearchSubmit} className={styles.searchForm}>
-    <InputWithLabel
-      id="search"
-      value={searchTerm}
-      isFocused
-      onInputChange={onSearchInput}
-    >
-      <strong>Search:</strong>
-    </InputWithLabel>
-
-    <button
-      type="submit"
-      disabled={!searchTerm}
-      className={`${styles.button} ${styles.buttonLarge}`}
-    >
-      Submit
-    </button>
-  </form>
-);
-
-const InputWithLabel = ({
-  id,
-  value,
-  type = "text",
-  onInputChange,
-  isFocused,
-  children,
-}) => {
-  const inputRef = React.useRef();
-
-  React.useEffect(() => {
-    if (isFocused) {
-      inputRef.current.focus();
-    }
-  }, [isFocused]);
-
-  return (
-    <>
-      <label htmlFor={id} className={styles.label}>
-        {children}
-      </label>
-      &nbsp;
-      <input
-        ref={inputRef}
-        id={id}
-        type={type}
-        value={value}
-        onChange={onInputChange}
-        className={styles.input}
-      />
-    </>
   );
 };
 
