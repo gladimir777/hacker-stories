@@ -1,11 +1,9 @@
-import { React } from "react";
+import { useState, useEffect } from "react";
 
 export const useSemiPersistentState = (key, initialState) => {
-  const [value, setValue] = React.useState(
-    localStorage.getItem(key) || initialState
-  );
+  const [value, setValue] = useState(localStorage.getItem(key) || initialState);
 
-  React.useEffect(() => {
+  useEffect(() => {
     localStorage.setItem(key, value);
   }, [value, key]);
 

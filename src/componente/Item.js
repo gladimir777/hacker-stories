@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../../src/App.module.css";
 
-const Item = ({ item, onRemoveItem }) => (
+const Item = ({ item, onRemoveItem, Check }) => (
   <div className={styles.item}>
     <span style={{ width: "40%" }}>
       <a href={item.url}>{item.title}</a>
@@ -15,7 +15,7 @@ const Item = ({ item, onRemoveItem }) => (
         onClick={() => onRemoveItem(item)}
         className={`${styles.button} ${styles.buttonSmall}`}
       >
-        Dismiss
+        <Check height="18px" width="18px" />
       </button>
     </span>
   </div>

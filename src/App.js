@@ -3,6 +3,7 @@ import axios from "axios";
 import SearchForm from "./componente/SearchForm";
 import styles from "./App.module.css";
 import List from "./componente/List";
+import { ReactComponent as Check } from "./check.svg";
 
 import { storiesReducer } from "./reducers/story";
 
@@ -72,7 +73,11 @@ const App = () => {
       {stories.isLoading ? (
         <p>Loading ...</p>
       ) : (
-        <List list={stories.data} onRemoveItem={handleRemoveStory} />
+        <List
+          list={stories.data}
+          onRemoveItem={handleRemoveStory}
+          Check={Check}
+        />
       )}
     </div>
   );
