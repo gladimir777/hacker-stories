@@ -159,6 +159,7 @@ const List = ({ list, onRemoveItem }) =>
   ));
 
 const Item = ({ item, onRemoveItem }) => (
+  //console test
   <div>
     <span>
       <a href={item.url}>{item.title}</a>
